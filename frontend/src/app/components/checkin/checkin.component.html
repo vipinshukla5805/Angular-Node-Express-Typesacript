@@ -1,0 +1,25 @@
+<h1 class="text-center">{{'RETRIEVE YOUR BOOKING' | translate}}</h1>
+<p class="text-left">{{'You can find your booking by filling out your family name and the booking code in your booking confirmation' | translate}}</p>
+<form class="app-form" [formGroup]="appForm" (ngSubmit)="onFormSubmit(appForm.value)" >     
+    <mat-form-field  matFormFieldControl>
+        <mat-label *ngIf="appForm.get('bookingCodeFromControl').hasError('pattern') && !appForm.get('bookingCodeFromControl').hasError('required')">
+            Please enter a valid booking code(AlphaNumeric Only).
+        </mat-label>
+        <mat-label *ngIf="appForm.get('bookingCodeFromControl').touched && appForm.get('bookingCodeFromControl').hasError('required')">
+            Booking code is <strong>required</strong>
+        </mat-label>
+        <input formControlName="bookingCodeFromControl" matInput [errorStateMatcher]="matcher"  [(ngModel)]="bookingCode"  placeholder="{{'Booking Code' | translate}}">
+        <mat-icon matSuffix></mat-icon>        
+    </mat-form-field>
+    <mat-form-field  matFormFieldControl>
+        <input  formControlName="familyCodeFormControl" matInput [errorStateMatcher]="matcher" [(ngModel)]="familyCode" placeholder="{{'Family Name' | translate}}">
+        <mat-icon matSuffix></mat-icon>
+        <mat-label *ngIf="appForm.get('familyCodeFormControl').hasError('pattern') && !appForm.get('familyCodeFormControl').hasError('required')">
+            Please enter a valid family name(Alphabets Only).
+        </mat-label>
+        <mat-label *ngIf="appForm.get('familyCodeFormControl').touched && appForm.get('familyCodeFormControl').hasError('required')">
+            Family name is <strong>required</strong>
+        </mat-label>
+    </mat-form-field>
+    <button mat-raised-button [disabled]="appForm.invalid"  color="primary"> {{'Submit' | translate}}</button>
+</form>

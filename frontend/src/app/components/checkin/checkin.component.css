@@ -1,0 +1,7 @@
+.app-form{
+  display: flex;
+  flex-direction: column;
+}
+.app-form > * {
+    width:100%;
+}
